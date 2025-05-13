@@ -1,0 +1,113 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.intro {
+    width: 60%;
+    padding: 10px;
+    background-color: #e0f7fa;
+}
+
+.auth {
+    width: 35%;
+    text-align: right;
+    padding: 10px;
+    background-color: #ffe0b2;
+}
+
+.auth button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.image-section {
+    text-align: center;
+    padding: 30px;
+}
+
+.countries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 30px;
+    background-color: #f0f4c3;
+}
+
+.country {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.country img {
+    max-width: 100%;
+    height: auto;
+}
+
+.country p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.board-section {
+    padding: 30px;
+}
+
+.board-section h3 {
+    margin-bottom: 15px;
+    border-left: 5px solid #81c784;
+    padding-left: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table thead {
+    background-color: #c8e6c9;
+}
+
+.write-btn {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.write-btn button {
+    padding: 6px 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.write-btn button:hover {
+    background-color: #388e3c;
+}
