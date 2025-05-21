@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>게시글 보기</title>
-  
+  <link rel="stylesheet" type="text/css" href="css/view.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <h3>${post.title}</h3>
     <p>${post.description}</p>
     <img src="${post.imageUrl}" alt="${post.title}">
-    <p><a href="main.jsp">← 목록으로 돌아가기</a></p>
+    <p><a href="New.jsp">← 목록으로 돌아가기</a></p>
 </div>
 
 <!-- 푸터 포함 -->

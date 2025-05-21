@@ -15,7 +15,7 @@
 <html>
 <head>
     <title>글쓰기</title>
-    
+    <link rel="stylesheet" type="text/css" href="css/write.css">
 </head>
 <body>
 
