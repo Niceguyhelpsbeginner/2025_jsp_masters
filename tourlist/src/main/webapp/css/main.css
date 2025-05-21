@@ -1,113 +1,212 @@
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 .header {
     text-align: center;
-    padding: 20px;
-    background-color: #f2f2f2;
-    font-size: 24px;
+    padding: 30px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    font-size: 32px;
     font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .top-section {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .intro {
     width: 60%;
-    padding: 10px;
-    background-color: #e0f7fa;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.intro:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .auth {
     width: 35%;
     text-align: right;
-    padding: 10px;
-    background-color: #ffe0b2;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
 }
 
 .auth button {
     margin-left: 10px;
-    padding: 6px 12px;
+    padding: 8px 16px;
     font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth button:first-of-type {
+    background-color: #4caf50;
+    color: white;
+}
+
+.auth button:last-of-type {
+    background-color: #f44336;
+    color: white;
+}
+
+.auth button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .image-section {
     text-align: center;
-    padding: 30px;
+    padding: 40px;
+    background: url('images/airplane.jpg') center/cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .countries {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 30px;
-    background-color: #f0f4c3;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .country {
     text-align: center;
     background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.country:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .country img {
     max-width: 100%;
     height: auto;
+    border-radius: 8px;
 }
 
 .country p {
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: bold;
+    color: #333;
 }
 
 .board-section {
     padding: 30px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .board-section h3 {
-    margin-bottom: 15px;
-    border-left: 5px solid #81c784;
-    padding-left: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #2575fc;
+    padding-left: 15px;
+    color: #333;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
 }
 
-table thead {
-    background-color: #c8e6c9;
+table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #333;
+}
+
+table tr:hover {
+    background-color: #f8f9fa;
+}
+
+table a {
+    color: #2575fc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+table a:hover {
+    color: #6a11cb;
 }
 
 .write-btn {
     text-align: right;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .write-btn button {
-    padding: 6px 12px;
-    background-color: #4caf50;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .write-btn button:hover {
-    background-color: #388e3c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .top-section {
+        flex-direction: column;
+    }
+    
+    .intro, .auth {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .countries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
