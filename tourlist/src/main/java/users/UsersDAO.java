@@ -9,11 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import posts.PostsDTO;
-
-
 public class UsersDAO {
-	public Connection getConnection() throws Exception{
+	public Connection getConnection() throws Exception {
 		//connection pool을 활용한 DB연동
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context)initCtx.lookup("java:comp/env");
@@ -21,25 +18,64 @@ public class UsersDAO {
 		Connection con = ds.getConnection();
 		return con;
 	}
-	public ArrayList<PostsDTO> list(){
-		String sql = "SELECT * FROM MEMBER";
-		ArrayList<PostsDTO> dtos = new ArrayList<PostsDTO>();
+	
+	// 사용자 목록 조회
+	public ArrayList<UsersDTO> list() {
+		String sql = "SELECT usernum, username, address, pwd, nickname FROM Users";
+		ArrayList<UsersDTO> dtos = new ArrayList<UsersDTO>();
 		try(Connection con = getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);			
-			) { //ResultSet에 들어있는 레코드를 추출하여 ArrayList에 추가
-			while (rs.next()){
-				String id = rs.getString("id");
-				String name = rs.getString("name");
+			) {
+			while (rs.next()) {
+				String usernum = rs.getString("usernum");
+				String username = rs.getString("username");
+				String address = rs.getString("address");
 				String pwd = rs.getString("pwd");
-				PostsDTO dto = new PostsDTO(id,name,pwd);
+				String nickname = rs.getString("nickname");
+				
+				UsersDTO dto = new UsersDTO(usernum, username, address, pwd, nickname);
 				dtos.add(dto);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return dtos;
 	}
-
+	
+	// 사용자 정보 조회
+	public UsersDTO getUser(String usernum) {
+		String sql = "SELECT usernum, username, address, pwd, nickname FROM Users WHERE usernum = '" + usernum + "'";
+		UsersDTO dto = null;
+		try(Connection con = getConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);			
+			) {
+			if (rs.next()) {
+				String username = rs.getString("username");
+				String address = rs.getString("address");
+				String pwd = rs.getString("pwd");
+				String nickname = rs.getString("nickname");
+				
+				dto = new UsersDTO(usernum, username, address, pwd, nickname);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	// 사용자 로그인 확인
+	public boolean checkLogin(String username, String pwd) {
+		String sql = "SELECT * FROM Users WHERE username = '" + username + "' AND pwd = '" + pwd + "'";
+		try(Connection con = getConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);			
+			) {
+			return rs.next(); // 결과가 있으면 true, 없으면 false 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

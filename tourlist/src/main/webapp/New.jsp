@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="posts.PostsDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="posts.PostsDAO"%>
 <%
     String userId = (String) session.getAttribute("userId");
 %>
@@ -122,6 +125,19 @@
                     <p class="card-text">타코야키, 오코노미야키 등 오사카에서 꼭 가봐야 할 맛집을 소개합니다.</p>
                 </div>
             </div>
+            <%
+		        PostsDAO dao = new PostsDAO();
+		        ArrayList<PostsDTO> dtos = dao.list();
+		    %>
+            <% for(PostsDTO dto : dtos) { %>
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5><a href="view.jsp?id=<%=dto.getPostnum()%>" class="text-decoration-none text-primary"><%=dto.getTitle()%></a></h5>
+                    <p class="text-muted">by <%=dto.getAuthor_id()%> | <%=dto.getCreated_at()%></p>
+                    <p class="card-text"><%=dto.getContent()%></p>
+                </div>
+            </div>
+            <%} %>
         </div>
     </div>
 </main>

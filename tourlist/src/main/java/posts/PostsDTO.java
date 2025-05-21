@@ -9,7 +9,7 @@ public class PostsDTO {
 	private String like_count;
 	private String author_id;
 	private String country;
-
+	
 	public PostsDTO(String postnum, String title, String content, String created_at, String views, String like_count, String author_id, String country) {
 		this.postnum = postnum;
 		this.title = title;
@@ -20,10 +20,6 @@ public class PostsDTO {
 		this.author_id = author_id;
 		this.country = country;
 	}
-//	
-//	public PostsDTO() {
-//	}
-	
 	
 	public String getPostnum() {
 		return postnum;
