@@ -1,52 +1,36 @@
 body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 30px;
-        }
+    background-color: #f9fafb;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
-        .container {
-            width: 600px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+.form-container {
+    max-width: 720px;
+    margin-top: 60px;  /* 네비바 높이 고려해서 살짝 올림 */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+h2 {
+    font-weight: bold;
+    color: #212529;
+}
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
+label {
+    font-weight: 500;
+    color: #495057;
+}
 
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            box-sizing: border-box;
-        }
+.readonly {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
 
-        textarea {
-            height: 200px;
-            resize: vertical;
-        }
+textarea.form-control {
+    resize: vertical;
+}
 
-        .buttons {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .buttons input {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 14px;
-        }
-
-        .readonly {
-            background-color: #f0f0f0;
-        }
+footer {
+    font-size: 14px;
+}

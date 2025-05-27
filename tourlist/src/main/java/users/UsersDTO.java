@@ -7,9 +7,6 @@ public class UsersDTO {
 	private String pwd;
 	private String nickname;
 	
-	// 기본 생성자
-	public UsersDTO() {
-	}
 	
 	// 모든 필드를 매개변수로 받는 생성자
 	public UsersDTO(String usernum, String username, String address, String pwd, String nickname) {
@@ -19,9 +16,12 @@ public class UsersDTO {
 		this.pwd = pwd;
 		this.nickname = nickname;
 	}
-	
+	// 기본 생성자
+	public UsersDTO() {
+	}
+		
 	public String getUsernum() {
-		return usernum;
+		return this.usernum;
 	}
 	
 	public void setUsernum(String usernum) {
@@ -29,7 +29,7 @@ public class UsersDTO {
 	}
 	
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 	
 	public void setUsername(String username) {
@@ -37,7 +37,7 @@ public class UsersDTO {
 	}
 	
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 	
 	public void setAddress(String address) {
@@ -45,7 +45,7 @@ public class UsersDTO {
 	}
 	
 	public String getPwd() {
-		return pwd;
+		return this.pwd;
 	}
 	
 	public void setPwd(String pwd) {
@@ -53,7 +53,7 @@ public class UsersDTO {
 	}
 	
 	public String getNickname() {
-		return nickname;
+		return this.nickname;
 	}
 	
 	public void setNickname(String nickname) {
