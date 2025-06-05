@@ -38,7 +38,7 @@
 
         <!-- 뒤로 가기 버튼 이동 -->
         <div class="mt-3">
-            <a href="New.jsp" class="btn btn-secondary w-100">뒤로 가기</a>
+            <a href="main.jsp" class="btn btn-secondary w-100">뒤로 가기</a>
         </div>
 
         <!-- 회원가입 링크 이동 -->

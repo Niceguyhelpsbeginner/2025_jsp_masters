@@ -45,5 +45,5 @@
 //     posts.add(post);
 //     session.setAttribute("posts", posts);
 
-    response.sendRedirect("New.jsp");
+    response.sendRedirect("main.jsp");
 %>

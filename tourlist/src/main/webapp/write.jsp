@@ -71,7 +71,7 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">작성하기</button>
-                    <button type="button" class="btn btn-secondary" onclick="location.href='New.jsp'">취소</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='main.jsp'">취소</button>
                 </div>
             </form>
         </div>

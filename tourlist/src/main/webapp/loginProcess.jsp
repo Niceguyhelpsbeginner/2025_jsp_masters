@@ -23,7 +23,7 @@
       if (userId.equals(dto.getUsername())){
          if (dto.getPwd().equals(password)){
               session.setAttribute("userId", userId);
-              response.sendRedirect("New.jsp"); // 메인 페이지로 이동
+              response.sendRedirect("main.jsp"); // 메인 페이지로 이동
             break;
          }
          else{

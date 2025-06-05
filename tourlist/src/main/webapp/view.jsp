@@ -29,7 +29,7 @@
             <c:if test="${not empty post.imageUrl}">
                 <img src="${post.imageUrl}" alt="${post.title}" class="img-fluid rounded mb-3">
             </c:if>
-            <a href="New.jsp" class="btn btn-link">&larr; 목록으로 돌아가기</a>
+            <a href="main.jsp" class="btn btn-link">&larr; 목록으로 돌아가기</a>
         </div>
     </div>
 

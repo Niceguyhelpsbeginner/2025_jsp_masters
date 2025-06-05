@@ -22,7 +22,7 @@ public class PostsDAO {
 		return con;
 	}
 	public ArrayList<PostsDTO> list(){
-		String sql = "SELECT postnum, title, content, created_at, views,like_count, author_id, country FROM Posts";
+		String sql = "SELECT * FROM Posts";
 		ArrayList<PostsDTO> dtos = new ArrayList<PostsDTO>();
 		try(Connection con = getConnection();
 			Statement st = con.createStatement();
@@ -36,10 +36,10 @@ public class PostsDAO {
 				String views = rs.getString("views");
 				String like_count = rs.getString("like_count");
 				String author_id = rs.getString("author_id");
-				String image_path = rs.getString("image_path");
 				String country = rs.getString("country");
+				String image_path = rs.getString("image_path");
 				
-				PostsDTO dto = new PostsDTO(postnum, title, content, created_at, views,like_count, author_id, image_path, country);
+				PostsDTO dto = new PostsDTO(postnum, title, content, created_at, views,like_count, author_id, country, image_path);
 				dtos.add(dto);
 			}
 		} catch (Exception e) {

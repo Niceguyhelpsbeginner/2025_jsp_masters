@@ -1,136 +1,180 @@
 <%@page import="posts.PostsDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="posts.PostsDAO"%>
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="java.util.ArrayList"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String userId = (String) session.getAttribute("userId");
+    String country = request.getParameter("country");
+    
+    PostsDAO dao = new PostsDAO();
+    ArrayList<PostsDTO> dtos = dao.list();
+    request.setAttribute("dtos", dtos);
 %>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>Tour Board</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>TourList | 전 세계 여행 커뮤니티</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/New.css">
 </head>
 <body>
-<div class="header">
-    <i class="fas fa-globe-asia"></i> TourList
-</div>
 
-<div class="top-section">
-    <div class="intro">
-        <h3 style="cursor: pointer;" onclick="toggleIntro()">
-            <i class="fas fa-info-circle"></i> 소개
-        </h3>
-        <div id="introContent" style="display: none;">
-            <p>
-                이 웹사이트는 전 세계의 멋진 여행지를 소개하는 게시판입니다.<br>
-                다양한 나라의 관광지, 문화, 음식을 함께 즐겨보세요!
-            </p>
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="main.jsp">🌍 TourList</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if (userId == null) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="login.jsp">로그인</a>
+            </li>
+        <% } else { %>
+            <li class="nav-item">
+              <span class="nav-link active"><%= userId%>님</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="logout.jsp">로그아웃</a>
+            </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- 메인 콘텐츠 -->
+<main class="container" style="margin-top: 80px;">
+    <div class="row">
+        <!-- 왼쪽 소개 카드 및 나라별 필터 -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">🌟 소개</h5>
+                    <p class="card-text">
+                        TourList는 세계의 여행지를 공유하고 추천하는 플랫폼입니다.
+                        <br>당신만의 특별한 여행 스토리를 공유하세요!
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">🌏 나라별 보기</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="main.jsp" class="text-decoration-none text-dark">🌐 전체 보기</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('한국'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/korea.png" alt="한국" class="me-2" style="width: 30px; height: 30px;">한국
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('일본'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/japan.png" alt="일본" class="me-2" style="width: 30px; height: 30px;">일본
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('프랑스'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/france.png" alt="프랑스" class="me-2" style="width: 30px; height: 30px;">프랑스
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('미국'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/usa.png" alt="미국" class="me-2" style="width: 30px; height: 30px;">미국
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('태국'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/thailand.png" alt="태국" class="me-2" style="width: 30px; height: 30px;">태국
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('베트남'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/vietnam.png" alt="베트남" class="me-2" style="width: 30px; height: 30px;">베트남
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('이탈리아'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/italy.png" alt="이탈리아" class="me-2" style="width: 30px; height: 30px;">이탈리아
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" onclick="goCountry('호주'); return false;" class="text-decoration-none text-dark">
+                            <img src="images/flag/australia.png" alt="호주" class="me-2" style="width: 30px; height: 30px;">호주
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 오른쪽 게시글 영역 -->
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>📌 여행 이야기 
+                    <small class="text-muted">
+                        <% if (country != null) { %> - <%= country %> <% } %>
+                    </small>
+                </h4>
+                <% if (userId != null) { %>
+                    <a class="btn btn-success btn-sm" href="write.jsp">+ 글쓰기</a>
+                <% } %>
+            </div>
+
+            <!-- 게시글 출력 -->
+            <% if (userId == null && country != null) { %>
+                <div class="alert alert-warning">해당 국가의 게시글을 보려면 로그인이 필요합니다.</div>
+            <% } else { %>
+                <% boolean hasPosts = false; %>
+                <% for(PostsDTO dto : dtos) { %>
+                    <% if(country == null || country.equals("전체") || dto.getCountry().equals(country)) { %>
+                        <% hasPosts = true; %>
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <h5><a href="view.jsp?id=<%= dto.getPostnum() %>" class="text-decoration-none text-primary"><%= dto.getTitle() %></a></h5>
+                                <p class="text-muted">
+                                    by <a href="userPosts.jsp?author=<%= dto.getAuthor_id() %>" class="text-decoration-none"><%= dto.getAuthor_id() %></a> | 
+                                    <%= dto.getCreated_at() %> | 
+                                    조회수: <%= dto.getViews() %> | 
+                                    좋아요: <%= dto.getLike_count() %>
+                                </p>
+                                <p class="card-text"><%= dto.getContent() %></p>
+                                <% if(dto.getImage_path() != null && !dto.getImage_path().isEmpty()) { %>
+                                    <img src="<%= dto.getImage_path() %>" class="img-fluid mt-2" alt="게시글 이미지">
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+                <% if(!hasPosts) { %>
+                    <div class="alert alert-info">게시글이 없습니다.</div>
+                <% } %>
+            <% } %>
         </div>
     </div>
+</main>
 
-    <div class="auth">
-        <% if (userId == null) { %>
-            <button onclick="location.href='login.jsp'"><i class="fas fa-sign-in-alt"></i> 로그인</button>
-        <% } else { %>
-            <span><i class="fas fa-user"></i> <%= userId %>님</span>
-            <button onclick="location.href='logout.jsp'"><i class="fas fa-sign-out-alt"></i> 로그아웃</button>
-            <button onclick="location.href='write.jsp'"><i class="fas fa-pen"></i> 글쓰기</button>
-        <% } %>
-    </div>
-</div>
+<!-- Footer -->
+<footer class="bg-light text-center text-muted py-3 mt-5 border-top">
+    ⓒ 2025 TourBoard. All rights reserved.
+</footer>
 
-<div class="image-section">
-    <div>
-        <h2>당신의 꿈꾸는 여행을 시작하세요</h2>
-        <p>전 세계의 아름다운 여행지를 만나보세요</p>
-    </div>
-</div>
-
-<div class="countries">
-    <div class="country">
-        <img src="images/korea.png" alt="한국">
-        <p><i class="fas fa-map-marker-alt"></i> 한국</p>
-    </div>
-    <div class="country">
-        <img src="images/japan.png" alt="일본">
-        <p><i class="fas fa-map-marker-alt"></i> 일본</p>
-    </div>
-    <div class="country">
-        <img src="images/france.png" alt="프랑스">
-        <p><i class="fas fa-map-marker-alt"></i> 프랑스</p>
-    </div>
-    <div class="country">
-        <img src="images/italy.png" alt="이탈리아">
-        <p><i class="fas fa-map-marker-alt"></i> 이탈리아</p>
-    </div>
-    <div class="country">
-        <img src="images/usa.png" alt="미국">
-        <p><i class="fas fa-map-marker-alt"></i> 미국</p>
-    </div>
-    <div class="country">
-        <img src="images/thailand.png" alt="태국">
-        <p><i class="fas fa-map-marker-alt"></i> 태국</p>
-    </div>
-    <div class="country">
-        <img src="images/vietnam.png" alt="베트남">
-        <p><i class="fas fa-map-marker-alt"></i> 베트남</p>
-    </div>
-    <div class="country">
-        <img src="images/australia.png" alt="호주">
-        <p><i class="fas fa-map-marker-alt"></i> 호주</p>
-    </div>
-</div>
-
-<div class="board-section">
-    <h3><i class="fas fa-list"></i> 최신 게시글</h3>
-    <% if (userId != null) { %>
-    <div class="write-btn">
-        <button onclick="location.href='write.jsp'"><i class="fas fa-pen"></i> 글쓰기</button>
-    </div>
-    <% } %>
-    
-    <%
-        PostsDAO dao = new PostsDAO();
-        ArrayList<PostsDTO> dtos = dao.list();
-    %>
-    
-    <table>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>좋아요</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for(PostsDTO dto : dtos) { %>
-        <tr>
-            <td><%= dto.getId() %></td>
-            <td><a href="view.jsp?id=<%= dto.getId() %>"><%= dto.getTitle() %></a></td>
-            <td><i class="fas fa-user"></i> <%= dto.getAuthor() %></td>
-            <td><i class="far fa-calendar-alt"></i> <%= dto.getCreated_at() %></td>
-            <td><i class="fas fa-heart"></i> <%= dto.getLike_count() %></td>
-        </tr>
-        <% } %>
-        </tbody>
-    </table>
-</div>
-
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function toggleIntro() {
-        const content = document.getElementById("introContent");
-        if (content.style.display === "none" || content.style.display === "") {
-            content.style.display = "block";
-            content.style.animation = "fadeIn 0.5s ease-in-out";
+    function goCountry(country) {
+        const isLoggedIn = <%= (userId != null) ? "true" : "false" %>;
+        if (!isLoggedIn) {
+            alert("로그인이 필요합니다.");
+            window.location.href = "login.jsp";
         } else {
-            content.style.display = "none";
+            window.location.href = "main.jsp?country=" + encodeURIComponent(country);
         }
     }
 </script>
-
 </body>
 </html>
