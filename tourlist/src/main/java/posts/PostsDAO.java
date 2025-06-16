@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import users.UsersDTO;
+
 
 
 public class PostsDAO {
@@ -49,23 +51,23 @@ public class PostsDAO {
 		return dtos;
 	}
 	public void write_post(PostsDTO dto) throws Exception {
-		Connection con;
-		try {
-			con = getConnection();
-	        String sql = "INSERT INTO Comments(title,content,author_id,country) VALUES(?, ?, ?, ?)" ;
+		String sql = "INSERT INTO POSTS(title,content,author_id,country) VALUES(?, ?, ?, ?)" ;
+		try (Connection con = getConnection();
 	        PreparedStatement pstmt = con.prepareStatement(sql);
+			){
 	        pstmt.setString(1, dto.getTitle());
 	        pstmt.setString(2, dto.getContent());
 	        pstmt.setString(3, dto.getAuthor_id());
 	        pstmt.setString(4, dto.getCountry());
-	        int updated_query = pstmt.executeUpdate();
+	        System.out.println(dto.getTitle());
+	        pstmt.executeUpdate();	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-        
-        
     }
+	public void getUsername(PostDTO dto) throws Exception{
+		UsersDTO usersDTO  = new UsersDTO();
+		
+	}
 }

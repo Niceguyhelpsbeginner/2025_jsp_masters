@@ -8,12 +8,6 @@
     String userId = request.getParameter("userId");
     String password = request.getParameter("password");
 
-    // ✅ 하드코딩된 아이디/비밀번호 (예: test / 1234)
-    /*
-    String hardcodedId = "1";
-    String hardcodedPw = "1";
-*/
-
    UsersDAO dao = new UsersDAO();
 
    ArrayList<UsersDTO> dtos = dao.list();
@@ -21,8 +15,8 @@
    for (UsersDTO dto: dtos){
 	   
       if (userId.equals(dto.getUsername())){
-         if (dto.getPwd().equals(password)){
-              session.setAttribute("userId", userId);
+         if (dto.getpassword().equals(password)){
+              session.setAttribute("username", userId);
               response.sendRedirect("main.jsp"); // 메인 페이지로 이동
             break;
          }

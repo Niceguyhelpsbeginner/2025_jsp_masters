@@ -3,7 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String userId = (String) session.getAttribute("userId");
+    String username = (String) session.getAttribute("username");
     String country = request.getParameter("country");
     
     PostsDAO dao = new PostsDAO();
@@ -30,13 +30,13 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-        <% if (userId == null) { %>
+        <% if (username == null) { %>
             <li class="nav-item">
               <a class="nav-link" href="login.jsp">로그인</a>
             </li>
         <% } else { %>
             <li class="nav-item">
-              <span class="nav-link active"><%= userId%>님</span>
+              <span class="nav-link active"><%= username%>님</span>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.jsp">로그아웃</a>
@@ -120,13 +120,13 @@
                         <% if (country != null) { %> - <%= country %> <% } %>
                     </small>
                 </h4>
-                <% if (userId != null) { %>
+                <% if (username != null) { %>
                     <a class="btn btn-success btn-sm" href="write.jsp">+ 글쓰기</a>
                 <% } %>
             </div>
 
             <!-- 게시글 출력 -->
-            <% if (userId == null && country != null) { %>
+            <% if (username == null && country != null) { %>
                 <div class="alert alert-warning">해당 국가의 게시글을 보려면 로그인이 필요합니다.</div>
             <% } else { %>
                 <% boolean hasPosts = false; %>
@@ -167,7 +167,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function goCountry(country) {
-        const isLoggedIn = <%= (userId != null) ? "true" : "false" %>;
+        const isLoggedIn = <%= (username != null) ? "true" : "false" %>;
         if (!isLoggedIn) {
             alert("로그인이 필요합니다.");
             window.location.href = "login.jsp";

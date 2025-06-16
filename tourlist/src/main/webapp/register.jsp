@@ -32,20 +32,16 @@
         <h2 class="my-4 text-center">회원가입</h2>
         <form action="registerProcess.jsp" method="post">
             <div class="mb-3">
-                <label for="userId" class="form-label">아이디</label>
-                <input type="text" class="form-control input-narrow" id="userId" name="userId" required>
+                <label for="username" class="form-label">아이디</label>
+                <input type="text" class="form-control input-narrow" id="username" name="username" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">비밀번호</label>
                 <input type="password" class="form-control input-narrow" id="password" name="password" required>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">이메일</label>
-                <input type="email" class="form-control input-narrow" id="email" name="email" required>
-            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">회원가입</button>
-                <a href="New.jsp" class="btn btn-secondary ms-2">취소</a>
+                <a href="main.jsp" class="btn btn-secondary ms-2">취소</a>
             </div>
         </form>
     </div>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String userId = (String) session.getAttribute("userId");
-    if (userId == null) {
+    String username = (String) session.getAttribute("username");
+    if (username == null) {
         response.setContentType("text/html; charset=UTF-8");
 %>
 <script>
@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <span class="nav-link active"><%= userId %>님</span>
+          <span class="nav-link active"><%= username %>님</span>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.jsp">로그아웃</a>
@@ -48,7 +48,7 @@
             글쓰기
         </div>
         <div class="card-body">
-            <form action="writePost.jsp" method="post" enctype="multipart/form-data">
+            <form action="writePost.jsp" method="get" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">제목</label>
                     <input type="text" id="title" name="title" class="form-control" placeholder="제목" required>
@@ -63,11 +63,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="writer" class="form-label">작성자</label>
-                    <input type="text" id="writer" name="writer" class="form-control" value="<%= userId %>" readonly>
+                    <input type="text" id="writer" name="writer" class="form-control" value="<%= username %>" readonly>
                 </div>                
                 <div class="mb-3">
-                    <label for="country" class="form-label">나라</label>
-                    <input type="text" id="country" name="country" class="form-control">
+					<select name="country" id="country" required>
+					            <option value="korea">한국</option>
+					            <option value="japan">일본</option>
+					            <option value="france">프랑스</option>
+					            <option value="usa">미국</option>
+					            <option value="thailand">태국</option>
+					            <option value="vietnam">베트남</option>
+					            <option value="italy">이탈리아</option>
+					            <option value="australia">호주</option>
+					</select>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">작성하기</button>

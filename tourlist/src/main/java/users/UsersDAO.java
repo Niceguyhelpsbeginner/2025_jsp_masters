@@ -1,6 +1,7 @@
 package users;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class UsersDAO {
 	
 	// 사용자 목록 조회
 	public ArrayList<UsersDTO> list() {
-		String sql = "SELECT usernum, username, address, pwd, nickname FROM Users";
+		String sql = "SELECT usernum, username, address, password, nickname FROM Users";
 		ArrayList<UsersDTO> dtos = new ArrayList<UsersDTO>();
 		try(Connection con = getConnection();
 			Statement st = con.createStatement();
@@ -31,10 +32,10 @@ public class UsersDAO {
 				String usernum = rs.getString("usernum");
 				String username = rs.getString("username");
 				String address = rs.getString("address");
-				String pwd = rs.getString("pwd");
+				String password = rs.getString("password");
 				String nickname = rs.getString("nickname");
 				
-				UsersDTO dto = new UsersDTO(usernum, username, address, pwd, nickname);
+				UsersDTO dto = new UsersDTO(usernum, username, address, password, nickname);
 				dtos.add(dto);
 			}
 		} catch (Exception e) {
@@ -45,7 +46,7 @@ public class UsersDAO {
 	
 	// 사용자 정보 조회
 	public UsersDTO getUser(String usernum) {
-		String sql = "SELECT usernum, username, address, pwd, nickname FROM Users WHERE usernum = '" + usernum + "'";
+		String sql = "SELECT usernum, username, address, password, nickname FROM Users WHERE usernum = '" + usernum + "'";
 		UsersDTO dto = null;
 		try(Connection con = getConnection();
 			Statement st = con.createStatement();
@@ -54,10 +55,10 @@ public class UsersDAO {
 			if (rs.next()) {
 				String username = rs.getString("username");
 				String address = rs.getString("address");
-				String pwd = rs.getString("pwd");
+				String password = rs.getString("password");
 				String nickname = rs.getString("nickname");
 				
-				dto = new UsersDTO(usernum, username, address, pwd, nickname);
+				dto = new UsersDTO(usernum, username, address, password, nickname);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,8 +67,8 @@ public class UsersDAO {
 	}
 	
 	// 사용자 로그인 확인
-	public boolean checkLogin(String username, String pwd) {
-		String sql = "SELECT * FROM Users WHERE username = '" + username + "' AND pwd = '" + pwd + "'";
+	public boolean checkLogin(String username, String password) {
+		String sql = "SELECT * FROM Users WHERE username = '" + username + "' AND password = '" + password + "'";
 		try(Connection con = getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);			
@@ -76,6 +77,21 @@ public class UsersDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void register(UsersDTO dto) {
+		String sql = "INSERT INTO users(username,password) VALUES(?,?)";
+		try(
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);	
+		) {
+			pstmt.setString(1, dto.getUsername());
+			pstmt.setString(2, dto.getpassword());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

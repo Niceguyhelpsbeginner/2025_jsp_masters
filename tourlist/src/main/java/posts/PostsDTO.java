@@ -21,13 +21,15 @@ public class PostsDTO {
 		this.author_id = author_id;
 		this.country = country;
 	}
-	public PostsDTO(String title, String content, String author_id, String image_path, String country) {
+	public PostsDTO(String title, String content, String author_id, String country) {
 		this.title = title;
 		this.content = content;
 		this.author_id = author_id;
-		this.image_path = image_path;
 		this.country = country;
 	}
+	
+	public PostsDTO()	{}
+	
 	public String getImage_path() {
 		return this.image_path;
 	}
