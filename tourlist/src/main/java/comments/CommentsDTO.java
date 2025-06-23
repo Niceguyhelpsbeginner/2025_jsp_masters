@@ -20,6 +20,12 @@ public class CommentsDTO {
         this.created_at = created_at;
     }
     
+    public CommentsDTO(String commented_post, String commenter, String content) {
+        this.commented_post = commented_post;
+        this.commenter = commenter;
+        this.content = content;
+    }
+    
     // Getter와 Setter 메소드들
     public String getCommentnum() {
         return commentnum;

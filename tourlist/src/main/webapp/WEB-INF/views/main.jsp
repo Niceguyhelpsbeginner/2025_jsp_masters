@@ -131,7 +131,7 @@
             <% } else { %>
                 <% boolean hasPosts = false; %>
                 <% for(PostsDTO dto : dtos) { %>
-                    <% if(country == null || country.equals("전체") || dto.getCountry().equals(country)) { %>
+                    <% if(country == null || country.equals("전체") || (dto.getCountry() != null && dto.getCountry().equals(country))) { %>
                         <% hasPosts = true; %>
                         <div class="card mb-3 shadow-sm">
                             <div class="card-body">
@@ -168,7 +168,7 @@
 <script>
     function goCountry(country) {
         const isLoggedIn = <%= (username != null) ? "true" : "false" %>;
-        if (!isLoggedIn) {
+        if (isLoggedIn === "false") {
             alert("로그인이 필요합니다.");
             window.location.href = "login.jsp";
         } else {

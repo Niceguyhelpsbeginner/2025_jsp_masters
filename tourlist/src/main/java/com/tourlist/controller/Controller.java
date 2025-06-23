@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tourlist.service.userService;
+import com.tourlist.service.userInsertService;
+
 /**
  * Servlet implementation class Controller
  */
@@ -23,9 +26,13 @@ public class Controller extends HttpServlet {
 		String com = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf(".do"));
 		System.out.println(com);
 		String viewPage = null;
-		if(com != null && com.equals("list")) {
-			Service service = new MemberListService();
-			viewPage = "/WEB-INF/views/list.jsp";
+		if(com != null && com.equals("main")) {
+//			Service service = new MemberListService();
+			viewPage = "/WEB-INF/views/main.jsp";
+//			service.excute(request, response);
+		}else if(com != null && com.equals("insertForm")) {
+			userService service = new userInsertService();
+			viewPage = "/WEB-INF/views/insertForm.jsp";
 			service.excute(request, response);
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);

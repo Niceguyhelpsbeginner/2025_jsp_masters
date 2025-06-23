@@ -1,6 +1,7 @@
 package comments;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -45,18 +46,20 @@ public class CommentsDAO {
     
     // 댓글 작성
     public boolean insertComment(CommentsDTO dto) {
-        String sql = "INSERT INTO Comments (commented_post, commenter, content, created_at) VALUES ('" 
-            + dto.getCommented_post() + "', '" 
-            + dto.getCommenter() + "', '" 
-            + dto.getContent() + "', NOW())";
-        try(Connection con = getConnection();
-            Statement st = con.createStatement();            
-            ) {
-            return st.executeUpdate(sql) > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        String sql = "INSERT INTO comments (commented_post, commenter, content) VALUES (?, ?, ?);";
+		try (Connection con = getConnection();
+	        PreparedStatement pstmt = con.prepareStatement(sql);
+			){
+	        pstmt.setString(1, dto.getCommented_post());
+	        pstmt.setString(2, dto.getCommenter());
+	        pstmt.setString(3, dto.getContent());
+	        System.out.println(dto.getContent());
+	        pstmt.executeUpdate();	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
     
     // 댓글 삭제
