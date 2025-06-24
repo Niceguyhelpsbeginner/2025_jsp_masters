@@ -11,15 +11,16 @@ public class PostsDTO {
 	private String image_path;
 	private String country;
 	
-	public PostsDTO(String postnum, String title, String content, String created_at, String views, String like_count, String author_id,String img_path, String country) {
-		this.postnum = postnum;
-		this.title = title;
-		this.content = content;
-		this.created_at = created_at;
-		this.views = views;
-		this.like_count = like_count;
-		this.author_id = author_id;
-		this.country = country;
+	public PostsDTO(String postnum, String title, String content, String created_at, String views, String like_count, String author_id,String image_path, String country) {
+			this.postnum = postnum;
+			this.title = title;
+			this.content = content;
+			this.created_at = created_at;
+			this.views = views;
+			this.like_count = like_count;
+			this.author_id = author_id;
+			this.image_path = image_path;
+			this.country = country;
 	}
 	public PostsDTO(String title, String content, String author_id, String country) {
 		this.title = title;
@@ -30,12 +31,7 @@ public class PostsDTO {
 	
 	public PostsDTO()	{}
 	
-	public String getImage_path() {
-		return this.image_path;
-	}
-	public void setImage_path(String image_path) {
-		this.image_path = image_path;
-	}
+	
 	public String getPostnum() {
 		return postnum;
 	}
@@ -91,7 +87,14 @@ public class PostsDTO {
 	public void setAuthor_id(String author_id) {
 		this.author_id = author_id;
 	}
-
+	
+	public String getImage_path() {
+		return this.image_path;
+	}
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
+	}
+	
 	public String getCountry() {
 		return country;
 	}

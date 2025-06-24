@@ -5,11 +5,12 @@
 <%
     String username = (String) session.getAttribute("username");
     String country = request.getParameter("country");
-    
     PostsDAO dao = new PostsDAO();
     ArrayList<PostsDTO> dtos = dao.list();
     request.setAttribute("dtos", dtos);
+    System.out.println("main page : " + username);
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +24,7 @@
 <!-- 네비게이션 바 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="main.jsp">🌍 TourList</a>
+    <a class="navbar-brand fw-bold" href="main.do">🌍 TourList</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,14 +33,14 @@
       <ul class="navbar-nav">
         <% if (username == null) { %>
             <li class="nav-item">
-              <a class="nav-link" href="login.jsp">로그인</a>
+              <a class="nav-link" href="loginForm.do">로그인</a>
             </li>
         <% } else { %>
             <li class="nav-item">
-              <span class="nav-link active"><%= username%>님</span>
+              <span class="nav-link active">${username}님</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="logout.jsp">로그아웃</a>
+              <a class="nav-link" href="logout.do">로그아웃</a>
             </li>
         <% } %>
       </ul>
@@ -66,7 +67,7 @@
                 <div class="card-header bg-light fw-bold">🌏 나라별 보기</div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a href="main.jsp" class="text-decoration-none text-dark">🌐 전체 보기</a>
+                        <a href="main.do" class="text-decoration-none text-dark">🌐 전체 보기</a>
                     </li>
                     <li class="list-group-item">
                         <a href="#" onclick="goCountry('한국'); return false;" class="text-decoration-none text-dark">
@@ -121,7 +122,7 @@
                     </small>
                 </h4>
                 <% if (username != null) { %>
-                    <a class="btn btn-success btn-sm" href="write.jsp">+ 글쓰기</a>
+                    <a class="btn btn-success btn-sm" href="writeForm.do">+ 글쓰기</a>
                 <% } %>
             </div>
 
@@ -135,7 +136,7 @@
                         <% hasPosts = true; %>
                         <div class="card mb-3 shadow-sm">
                             <div class="card-body">
-                                <h5><a href="view.jsp?id=<%= dto.getPostnum() %>" class="text-decoration-none text-primary"><%= dto.getTitle() %></a></h5>
+                                <h5><a href="viewForm.do?id=<%= dto.getPostnum() %>" class="text-decoration-none text-primary"><%= dto.getTitle() %></a></h5>
                                 <p class="text-muted">
                                     by <a href="userPosts.jsp?author=<%= dto.getAuthor_id() %>" class="text-decoration-none"><%= dto.getAuthor_id() %></a> | 
                                     <%= dto.getCreated_at() %> | 
@@ -170,9 +171,9 @@
         const isLoggedIn = <%= (username != null) ? "true" : "false" %>;
         if (isLoggedIn === "false") {
             alert("로그인이 필요합니다.");
-            window.location.href = "login.jsp";
+            window.location.href = "loginForm.do";
         } else {
-            window.location.href = "main.jsp?country=" + encodeURIComponent(country);
+            window.location.href = "main.do?country=" + encodeURIComponent(country);
         }
     }
 </script>

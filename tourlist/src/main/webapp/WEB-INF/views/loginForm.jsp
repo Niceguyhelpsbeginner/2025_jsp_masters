@@ -22,7 +22,7 @@
             </div>
         <% } %>
 
-        <form method="post" action="loginProcess.jsp">
+        <form method="post" action="login.do">
             <div class="mb-3">
                 <label for="userId" class="form-label">아이디</label>
                 <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
@@ -38,12 +38,12 @@
 
         <!-- 뒤로 가기 버튼 이동 -->
         <div class="mt-3">
-            <a href="main.jsp" class="btn btn-secondary w-100">뒤로 가기</a>
+            <a href="main.do" class="btn btn-secondary w-100">뒤로 가기</a>
         </div>
 
         <!-- 회원가입 링크 이동 -->
         <div class="footer-text mt-3">
-            계정이 없으신가요? <a href="register.jsp">회원가입</a>
+            계정이 없으신가요? <a href="registerForm.do">회원가입</a>
         </div>
 
     </div>

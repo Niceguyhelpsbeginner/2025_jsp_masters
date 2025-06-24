@@ -18,20 +18,24 @@
 	PostsDAO dao = new PostsDAO();
 	ArrayList<PostsDTO> dtos = dao.list();
 	String postnum = request.getParameter("id");
-	System.out.println("받아온 정보 : " + postnum);
 	String title;
 	String content;
+	String country;
 	
 	for(PostsDTO dto: dtos){
 		if (dto.getPostnum().equals(postnum)){
-			
-			System.out.println(dto.getPostnum() + "일치하는 포스트넘버");
 			title = dto.getTitle();
 			content = dto.getContent();
-
+			country = dto.getCountry();
+			
 			request.setAttribute("title", title);
 			request.setAttribute("content", content);
-			System.out.println("title은 " + title);
+			
+			System.out.println("=== 디버깅 ===");
+			System.out.println("postnum: " + postnum);
+			System.out.println("title: " + title);
+			System.out.println("country: " + country);
+			System.out.println("=============");
 		}
 	}
 	// request scope에 등록
@@ -39,7 +43,7 @@
 %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="main.jsp">🌍 TourList</a>
+    <a class="navbar-brand fw-bold" href="main.do">🌍 TourList</a>
   </div>
 </nav>
 
@@ -54,7 +58,7 @@
             <c:if test="${not empty imageUrl}">
                 <img src="${imageUrl}" alt="${title}" class="img-fluid rounded mb-3">
             </c:if>
-            <a href="main.jsp" class="btn btn-link">&larr; 목록으로 돌아가기</a>
+            <a href="main.do" class="btn btn-link">&larr; 목록으로 돌아가기</a>
         </div>
     </div>
 
@@ -76,7 +80,7 @@
             </c:if>
 
             <!-- 댓글 작성 폼 -->
-            <form action="addComment.jsp" method="post" class="mt-4">
+            <form action="addComment.do" method="post" class="mt-4">
                 <input type="hidden" name="postId" value="${id}">
                 <div class="mb-3">
                     <label for="author" class="form-label">작성자</label>

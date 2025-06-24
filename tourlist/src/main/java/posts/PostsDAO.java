@@ -38,19 +38,19 @@ public class PostsDAO {
 				String views = rs.getString("views");
 				String like_count = rs.getString("like_count");
 				String author_id = rs.getString("author_id");
-				String country = rs.getString("country");
 				String image_path = rs.getString("image_path");
-				
-				PostsDTO dto = new PostsDTO(postnum, title, content, created_at, views,like_count, author_id, country, image_path);
+				String country = rs.getString("country");
+				PostsDTO dto = new PostsDTO(postnum, title, content, created_at, views, like_count, author_id, image_path, country);
 				dtos.add(dto);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
 		return dtos;
 	}
-	public void write_post(PostsDTO dto) throws Exception {
+	public void write_post(PostsDTO dto) {
 		String sql = "INSERT INTO POSTS(title,content,author_id,country) VALUES(?, ?, ?, ?)" ;
 		try (Connection con = getConnection();
 	        PreparedStatement pstmt = con.prepareStatement(sql);
@@ -64,10 +64,7 @@ public class PostsDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
     }
-	public void getUsername(PostDTO dto) throws Exception{
-		UsersDTO usersDTO  = new UsersDTO();
-		
-	}
 }

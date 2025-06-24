@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<!--오류원인찾음^-->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +32,7 @@
 <main class="container d-flex justify-content-center" style="margin-top: 100px;">
     <div class="w-100" style="max-width: 500px;">
         <h2 class="my-4 text-center">회원가입</h2>
-        <form action="registerProcess.jsp" method="post">
+        <form action="register.do" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">아이디</label>
                 <input type="text" class="form-control input-narrow" id="username" name="username" required>
@@ -41,7 +43,7 @@
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">회원가입</button>
-                <a href="main.jsp" class="btn btn-secondary ms-2">취소</a>
+                <a href="main.do" class="btn btn-secondary ms-2">취소</a>
             </div>
         </form>
     </div>

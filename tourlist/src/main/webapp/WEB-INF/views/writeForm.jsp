@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String username = (String) session.getAttribute("username");
+	System.out.print("writeForm"+username);
     if (username == null) {
         response.setContentType("text/html; charset=UTF-8");
 %>
 <script>
     alert("로그인 후 글쓰기를 이용하실 수 있습니다.");
-    location.href = "login.jsp";
+    location.href = "main.do";
 </script>
 <%
         return;
@@ -24,7 +25,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="main.jsp">🌍 TourList</a>
+    <a class="navbar-brand fw-bold" href="main.do">🌍 TourList</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,7 +36,7 @@
           <span class="nav-link active"><%= username %>님</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="logout.jsp">로그아웃</a>
+          <a class="nav-link" href="logout.do">로그아웃</a>
         </li>
       </ul>
     </div>
@@ -48,7 +49,7 @@
             글쓰기
         </div>
         <div class="card-body">
-            <form action="writePost.jsp" method="get" enctype="multipart/form-data">
+            <form action="write.do" method="get" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">제목</label>
                     <input type="text" id="title" name="title" class="form-control" placeholder="제목" required>
@@ -79,7 +80,7 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">작성하기</button>
-                    <button type="button" class="btn btn-secondary" onclick="location.href='main.jsp'">취소</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='main.do'">취소</button>
                 </div>
             </form>
         </div>
