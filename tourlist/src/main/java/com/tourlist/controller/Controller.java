@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.tourlist.service.commentInsertSerivce;
-import com.tourlist.service.commentService;
 import com.tourlist.service.postService;
 import com.tourlist.service.postWriteService;
 import com.tourlist.service.userLoginService;
@@ -67,11 +65,6 @@ public class Controller extends HttpServlet {
 			viewPage = "main.do";
 			postService service = new postWriteService();
 			service.execute(request, response);
-			
-//		}else if(com != null && com.equals("addComment")) { 
-//			viewPage = "main.do";
-//			commentService service = new commentInsertSerivce();
-//			service.execute(request, response);
 			
 		}
 		

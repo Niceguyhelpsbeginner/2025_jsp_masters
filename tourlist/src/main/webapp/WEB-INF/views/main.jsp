@@ -144,9 +144,6 @@
                                     좋아요: <%= dto.getLike_count() %>
                                 </p>
                                 <p class="card-text"><%= dto.getContent() %></p>
-                                <% if(dto.getImage_path() != null && !dto.getImage_path().isEmpty()) { %>
-                                    <img src="<%= dto.getImage_path() %>" class="img-fluid mt-2" alt="게시글 이미지">
-                                <% } %>
                             </div>
                         </div>
                     <% } %>
